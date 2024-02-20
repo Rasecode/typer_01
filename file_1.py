@@ -1,32 +1,30 @@
-import boto3
 import os
-import io
-from PIL import Image, ImageDraw
-from dotenv import load_dotenv
+import boto3
 
 
-class text_recognition:
+class TextRecognition:
+    AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+
+    region = "us-east-1"
+    service_name = "textract"
+
     def __init__(self):
-        load_dotenv()
-        AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-        AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-        self.client = boto3.client('textract',region_name='us-east-1',aws_access_key_id=AWS_ACCESS_KEY_ID,aws_secret_access_key=AWS_SECRET_ACCESS_KEY)
-
-    def ocr_recognition(self, image_bytes):
-
-        # buffer = io.BytesIO()
-        # image_jpg.save(buffer, format='JPEG')
-        # buffer.seek(0)
-
-        # img = bytearray(buffer.read())
-
-        response = self.client.detect_document_text(
-            Document={'Bytes': image_bytes}
+        self.client = boto3.client(
+            self.service_name,
+            region_name=self.region,
+            aws_access_key_id=self.WS_ACCESS_KEY_ID,
+            aws_secret_access_key=self.AWS_SECRET_ACCESS_KEY,
         )
+
+    def ocr_recognition(self, image_bytes: bytes):
+        assert isinstance(image_bytes, bytes)
+
+        response = self.client.detect_document_text(Document={"Bytes": image_bytes})
         text = ""
         for item in response["Blocks"]:
             if item["BlockType"] == "LINE":
-                print (item["Text"])
-                text = text + " "+item["Text"]
+                print(item["Text"])
+                text = text + " " + item["Text"]
 
         return text
