@@ -33,8 +33,8 @@ class ImageTextPipeline(ProcessImagesMixin):
 if __name__ == "__main__":
     # Lista de URLs de imágenes
     image_urls = [
-        "https://istolacio-production.s3.amazonaws.com/media/capture/27-10-2023-103852231283.png",
-        "https://istolacio-production.s3.amazonaws.com/media/capture/27-10-2023-103951999380.png",
+        "https://istolacio-production.s3.amazonaws.com/media/capture/27-10-2023-103852231283.png"
+        # "https://istolacio-production.s3.amazonaws.com/media/capture/27-10-2023-103951999380.png",
         # Agrega más URLs según sea necesario
     ]
 

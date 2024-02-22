@@ -15,7 +15,7 @@ class TextCorrector:
         assert isinstance(input_txt, str)
 
         print("mensaje en raw:")
-        print(self.input_txt)
+        print(input_txt)
         messages = [
             {
                 "role": "system",
@@ -25,7 +25,7 @@ class TextCorrector:
                             Return only the corrected text as output, including the necessary line breaks. The output must be in Spanish.""",
             },
         ]
-        messages.append({"role": "user", "content": f"{self.input_txt}"})
+        messages.append({"role": "user", "content": f"{input_txt}"})
         completion = self.client.chat.completions.create(
             model=self.model,
             messages=messages,

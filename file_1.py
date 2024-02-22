@@ -13,7 +13,7 @@ class TextRecognition:
         self.client = boto3.client(
             self.service_name,
             region_name=self.region,
-            aws_access_key_id=self.WS_ACCESS_KEY_ID,
+            aws_access_key_id=self.AWS_ACCESS_KEY_ID,
             aws_secret_access_key=self.AWS_SECRET_ACCESS_KEY,
         )
 
